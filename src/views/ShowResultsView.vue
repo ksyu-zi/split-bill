@@ -2,22 +2,24 @@
     <v-app>
         <v-main class="main">
             <v-container class="container">
-                <results></results>
-                <btn class="btn" @click="goToHome">Вернуться в начало</btn>
+                <ShowResults/>
+                <v-btn :to="{name: 'home'}" target="_self">
+                    Вернуться в начало
+                </v-btn>
+                <!-- <btn class="btn" @click="goToHome">Вернуться в начало</btn> -->
             </v-container>
         </v-main>
     </v-app>
 </template>
 
 <script>
-    import Results from '../components/Results.vue'
+    import ShowResults from '../components/ShowResults.vue'
     
     export default {
         methods: {
             goToHome() {
                 this.$store.commit('delAllPeople');
                 this.$store.commit('delAllCheque');
-                this.$router.push('/');
             }
         },
         components: {

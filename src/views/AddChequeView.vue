@@ -2,7 +2,11 @@
     <v-app>
         <v-main class="main">
             <v-container class="container">
-                <add-cheque></add-cheque>
+                <AddCheque/>
+                <v-btn :to="{name: 'results'}" target="_self">
+                    Показать результаты
+                </v-btn>
+                <router-link :to="{name: 'results'}" tag="button">Показать результаты</router-link>
                 <btn class="btn" @click="goToResults" v-if="!minCheque">Показать результаты</btn>
             </v-container>
         </v-main>

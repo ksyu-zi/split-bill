@@ -80,7 +80,5 @@ export default {
     delAllCheque: (state) => {
       state.cheque = [];
     }
-  },
-  actions: {
   }
 }

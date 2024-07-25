@@ -20,8 +20,5 @@ export default {
     delAllPeople: (state) => {
       state.people = [];
     }
-  },
-  actions: {
-    
   }
 }

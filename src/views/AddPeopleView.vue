@@ -2,7 +2,10 @@
     <v-app>
         <v-main class="main">
             <v-container class="container">
-                <add-people></add-people>
+                <AddPeople/>
+                <v-btn :to="{name: 'cheque'}" target="_self">
+                    Далее
+                </v-btn>
                 <btn class="btn" @click="goToAddCheque" v-if="!minPeople">Далее</btn>
             </v-container>
         </v-main>

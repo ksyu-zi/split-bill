@@ -17,7 +17,9 @@
         </v-row>
         <v-row>
           <v-col>
-            <btn class="btn" @click="goToAddPeople">Начать</btn>
+            <v-btn :to="{name: 'people'}" target="_self">
+              Начать
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -27,11 +29,7 @@
 
 <script>
 export default {
-  methods: {
-    goToAddPeople() {
-      this.$router.push('/people');
-    }
-  }
+
 }
 </script>
 
