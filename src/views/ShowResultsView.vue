@@ -23,7 +23,7 @@
             }
         },
         components: {
-            Results
+            ShowResults
         }
     }
 </script>
