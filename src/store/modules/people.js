@@ -14,8 +14,8 @@ export default {
     addPeople: (state) => {
       state.people.push({ id: Date.now(), name: '' });
     },
-    delPeople: (state, index) => {
-      state.people.splice(index, 1);
+    delPeople: (state, id) => {
+      state.people = state.people.filter(item => item.id !== id);
     },
     delAllPeople: (state) => {
       state.people = [];

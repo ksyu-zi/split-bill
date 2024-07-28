@@ -9,7 +9,7 @@ export default {
     total: state => {
       let res = 0;
       for (let i = 0; i < state.cheque.length; i++) {
-        res += state.cheque[i].price;
+        res += +state.cheque[i].price;
       }
       return res;
     },
@@ -71,11 +71,8 @@ export default {
         buyersId: []
       });
     },
-    setCheque: (state, index) => {
-      state.cheque[index].price = Math.abs(state.cheque[index].price);
-    },
-    delCheque: (state, index) => {
-      state.cheque.splice(index, 1);
+    delCheque: (state, id) => {
+      state.cheque = state.cheque.filter(item => item.id !== id);
     },
     delAllCheque: (state) => {
       state.cheque = [];
