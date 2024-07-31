@@ -1,7 +1,11 @@
 <template>
     <v-container>
         <AddCheque/>
-        <v-btn :to="{name: 'results'}" target="_self">
+        <v-btn
+          :to="{name: 'results'}"
+          target="_self"
+          :disabled="btnDisabled"
+        >
             Показать результаты
         </v-btn>
     </v-container>
@@ -15,11 +19,11 @@
             cheque() {
                 return this.$store.getters.getCheque;
             },
-            minCheque() {
-                if (this.cheque.length >= 2) {
+            btnDisabled() {
+                if (this.cheque.length >= 1) {
                     for (let i = 0; i < this.cheque.length; i++) {
                         if (this.cheque[i].name === '' || this.cheque[i].price === null ||
-                            this.cheque[i].payId === 'Кто платил?' || this.cheque[i].buyersId.length === 0) {
+                            this.cheque[i].payId === null || this.cheque[i].buyersId.length === 0) {
                             return true
                         }
                     }

@@ -1,7 +1,11 @@
 <template>
     <v-container>
         <AddPeople/>
-        <v-btn :to="{name: 'cheque'}" target="_self">
+        <v-btn
+          :to="{name: 'cheque'}"
+          target="_self"
+          :disabled="btnDisabled"
+        >
             Далее
         </v-btn>
     </v-container>
@@ -15,7 +19,7 @@
             people() {
                 return this.$store.getters.getPeople;
             },
-            minPeople() {
+            btnDisabled() {
                 if (this.people.length >= 2) {
                     for (let i = 0; i < this.people.length; i++) {
                         if (this.people[i].name === '') {

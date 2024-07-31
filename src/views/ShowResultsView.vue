@@ -1,7 +1,10 @@
 <template>
     <v-container>
         <ShowResults/>
-        <v-btn :to="{name: 'home'}" target="_self">
+        <v-btn
+          :to="{name: 'home'}"
+          target="_self"
+        >
             Вернуться в начало
         </v-btn>
     </v-container>

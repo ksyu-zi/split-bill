@@ -1,14 +1,27 @@
 <template>
     <v-container>
-        <v-btn @click="addPeople">+ Добавить человека</v-btn>
+        <v-btn
+          @click="addPeople"
+        >
+            + Добавить человека
+        </v-btn>
         <v-list>
-            <v-list-item v-for="(item, index) in people" :key="item.id">
+            <v-list-item
+              v-for="(item, index) in people"
+              :key="item.id"
+            >
                 <v-form @submit.prevent="">
-                    <v-text-field type="text" 
-                           label="Имя"
-                           v-model="people[index].name" 
-                           class="block"></v-text-field>
-                    <v-btn @click="delPeople(item.id)">-</v-btn> 
+                    <v-text-field
+                      type="text" 
+                      label="Имя"
+                      v-model="people[index].name" 
+                      :rules="[rules.errorName]"
+                      class="block"
+                    ></v-text-field>
+                    <v-btn
+                      @click="delPeople(item.id)"
+                      icon="mdi-delete-outline"
+                    ></v-btn> 
                 </v-form>  
             </v-list-item>
         </v-list>
@@ -17,6 +30,13 @@
 
 <script>
 export default {
+    data(){
+        return {
+            rules: {
+                errorName: v => !!v || 'Введите название позиции'
+            }
+        }
+    },
     computed: {
         people() {
             return this.$store.getters.getPeople;
