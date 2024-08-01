@@ -1,53 +1,76 @@
 <template>
     <v-container>
-        <v-btn @click="addCheque">
+        <v-btn
+          @click="addCheque"
+          class="bg-blue-grey-darken-4 text-blue-lighten-4"
+        >
             + Добавить позицию
         </v-btn>
-        <v-list>
-            <v-list-item
-              v-for="(item, index) in cheque"
-              :key="item.id"
-            >
-                <v-form @submit.prevent="">
-                    <v-text-field
-                      label="Название чека/продукта" 
-                      v-model="cheque[index].name"
-                      :rules="[rules.errorName]"
-                    ></v-text-field>
-                    <v-text-field
-                      type="number"
-                      :min="0"
-                      label="Сумма"
-                      v-model="cheque[index].price"
-                      :rules="[rules.errorPrice]"                   
-                    ></v-text-field>
-                    <v-btn
-                      icon="mdi-delete-outline"
-                      @click="delCheque(item.id)"
-                    ></v-btn>
-                    <v-select
-                      label="Кто платил?"
-                      v-model="cheque[index].payId"
-                      :items="people"
-                      item-title="name"
-                      item-value="id"
-                      :rules="[rules.errorSelect]"
-                    ></v-select>
-                    <v-select
-                      label="Кто заказывал?"
-                      v-model="cheque[index].buyersId"
-                      :items="people"
-                      item-title="name"
-                      item-value="id"
-                      :rules="[rules.errorSelects]"
-                      multiple
-                    ></v-select>                    
-                </v-form> 
-            </v-list-item>
+        <div class="block"
+          v-for="(item, index) in cheque"
+          :key="item.id"
+        >
+            <v-form @submit.prevent="">
+                <v-row justify="center">
+                    <v-col>
+                        <v-text-field
+                          label="Название чека/продукта" 
+                          v-model="cheque[index].name"
+                          :rules="[rules.errorName]"
+                          color="blue-lighten-4"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field
+                          type="number"
+                          :min="0"
+                          label="Сумма"
+                          v-model="cheque[index].price"
+                          :rules="[rules.errorPrice]"
+                          color="blue-lighten-4"                   
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="2">
+                        <v-btn
+                          icon="mdi-delete-outline"
+                          @click="delCheque(item.id)"
+                          class="bg-blue-grey-darken-4 text-blue-lighten-4"
+                          color="blue-lighten-4"
+                        ></v-btn>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <v-select
+                          label="Кто платил?"
+                          v-model="cheque[index].payId"
+                          :items="people"
+                          item-title="name"
+                          item-value="id"
+                          :rules="[rules.errorSelect]"
+                          color="blue-lighten-4"
+                        ></v-select>
+                    </v-col>
+                    <v-col>
+                        <v-select
+                          label="Кто заказывал?"
+                          v-model="cheque[index].buyersId"
+                          :items="people"
+                          item-title="name"
+                          item-value="id"
+                          :rules="[rules.errorSelects]"
+                          color="blue-lighten-4"
+                          multiple
+                        ></v-select>
+                    </v-col>
+                </v-row>    
+            </v-form> 
+        </div>
+        <h3>
             Общая сумма чеков
             <br>
             {{ totalSum }} руб.
-        </v-list>
+        </h3>
     </v-container>
 </template>
 
@@ -87,7 +110,3 @@ import people from '@/store/modules/people';
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

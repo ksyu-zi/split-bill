@@ -5,6 +5,7 @@
           :to="{name: 'results'}"
           target="_self"
           :disabled="btnDisabled"
+          class="bg-blue-grey-darken-4 text-blue-lighten-4"
         >
             Показать результаты
         </v-btn>
@@ -37,7 +38,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

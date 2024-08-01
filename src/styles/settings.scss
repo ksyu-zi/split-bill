@@ -1,0 +1,60 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+
+// https://vuetifyjs.com/features/sass-variables/`
+// @use 'vuetify/settings' with (
+//   $color-pack: false
+// );
+
+$back-color: #bbc4c8;
+$catchy-color:  #c5b7b3;
+$add-color: #a6cfe9;
+$primary-color: #2a6084;
+$dark-color: #2f3f44;
+$font-header: 'Montserrat', sans-serif;
+$font-text: 'Roboto', sans-serif;
+
+.main {
+    background-color: $back-color;
+    color: $dark-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.container {
+    background-color: $catchy-color;
+    max-width: 1000px;
+    padding: 30px 0;
+    border-radius: 20px;
+}
+
+.block {
+    // background-color: $add-color;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    color: $primary-color;
+    font-family: $font-header;
+    font-size: 36px;
+}
+
+p{
+    width: 63%;
+    margin-left: auto;
+    margin-right: auto;
+    color: $dark-color;
+    font-family: $font-text;
+    font-size: 18px;
+    padding-bottom: 15px;
+}

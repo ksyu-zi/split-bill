@@ -1,22 +1,20 @@
 <template>
     <v-container>
-        <h2>
+        <h1>
             Результаты
-        </h2>
-        <div>
+        </h1>
+        <div
+          v-for="item in getResults"
+          :key="item.id"
+        >
+            <h3 v-if="item.debtors">
+                Пользователю {{ item.name }} должны
+            </h3>
             <div
-              v-for="item in getResults"
-              :key="item.id"
+              v-for="debtor in item.debtors"
+              :key="debtor.id"
             >
-                <h2 v-if="item.debtors">
-                    Пользователю {{ item.name }} должны
-                </h2>
-                <p
-                  v-for="debtor in item.debtors"
-                  :key="debtor.id"
-                >
-                    {{ debtor.name }} - {{ debtor.debt }} руб.
-                </p>
+                {{ debtor.name }} - {{ debtor.debt }} руб.
             </div>
         </div>
     </v-container>
@@ -49,7 +47,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -9,13 +9,11 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-spacer>
-          Это приложение поможет вам разделить счёт.
-        </v-spacer>
-        <v-spacer>
+        <p>
+          Это приложение поможет вам разделить счёт. <br>
           Сначала добавьте людей, затем укажите позиции из счёта,
           кто его оплачивал, а также кто что ел или пил.
-        </v-spacer>
+        </p>
       </v-col>
     </v-row>
     <v-row>
@@ -23,6 +21,7 @@
         <v-btn 
           :to="{name: 'people'}"
           target="_self"
+          class="bg-blue-lighten-4 text-blue-grey-darken-4"
         >
           Начать
         </v-btn>
@@ -39,7 +38,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

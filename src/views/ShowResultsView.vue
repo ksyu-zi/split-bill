@@ -4,6 +4,7 @@
         <v-btn
           :to="{name: 'home'}"
           target="_self"
+          class="bg-blue-grey-darken-4 text-blue-lighten-4"
         >
             Вернуться в начало
         </v-btn>
@@ -19,7 +20,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

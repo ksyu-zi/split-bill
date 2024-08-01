@@ -5,6 +5,7 @@
           :to="{name: 'cheque'}"
           target="_self"
           :disabled="btnDisabled"
+          class="bg-blue-grey-darken-4 text-blue-lighten-4"
         >
             Далее
         </v-btn>
@@ -36,7 +37,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
