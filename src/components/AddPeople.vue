@@ -21,14 +21,14 @@
                           v-model="people[index].name" 
                           :rules="[rules.errorName]"
                           color="blue-lighten-4"
-                        ></v-text-field>
+                        />
                     </v-col>
                     <v-col cols="2">
                         <v-btn
                           @click="delPeople(item.id)"
                           icon="mdi-delete-outline"
                           class="bg-blue-grey-darken-4 text-blue-lighten-4"
-                        ></v-btn>
+                        />
                     </v-col>
                 </v-row>
             </v-form>  
@@ -37,26 +37,26 @@
 </template>
 
 <script>
-export default {
-    data(){
-        return {
-            rules: {
-                errorName: v => !!v || 'Введите название позиции'
+    export default {
+        data(){
+            return {
+                rules: {
+                    errorName: v => !!v || 'Введите имя участника'
+                }
+            }
+        },
+        computed: {
+            people() {
+                return this.$store.getters.getPeople;
+            }
+        },
+        methods: {
+            addPeople() {
+                this.$store.commit('addPeople');
+            },
+            delPeople(id) {
+                this.$store.commit('delPeople', id);
             }
         }
-    },
-    computed: {
-        people() {
-            return this.$store.getters.getPeople;
-        }
-    },
-    methods: {
-        addPeople() {
-            this.$store.commit('addPeople');
-        },
-        delPeople(id) {
-            this.$store.commit('delPeople', id);
-        }
     }
-}
 </script>

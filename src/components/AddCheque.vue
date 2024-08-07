@@ -16,19 +16,20 @@
                         <v-text-field
                           label="Название чека/продукта" 
                           v-model="cheque[index].name"
-                          :rules="[rules.errorName]"
+                          :rules="rules.errorName"
                           color="blue-lighten-4"
-                        ></v-text-field>
+                        />
                     </v-col>
                     <v-col>
-                        <v-text-field
-                          type="number"
+                        <v-number-input
+                          control-variant="stacked"
+                          inset
                           :min="0"
                           label="Сумма"
                           v-model="cheque[index].price"
                           :rules="[rules.errorPrice]"
                           color="blue-lighten-4"                   
-                        ></v-text-field>
+                        />
                     </v-col>
                     <v-col cols="2">
                         <v-btn
@@ -36,7 +37,7 @@
                           @click="delCheque(item.id)"
                           class="bg-blue-grey-darken-4 text-blue-lighten-4"
                           color="blue-lighten-4"
-                        ></v-btn>
+                        />
                     </v-col>
                 </v-row>
                 <v-row>
@@ -49,7 +50,7 @@
                           item-value="id"
                           :rules="[rules.errorSelect]"
                           color="blue-lighten-4"
-                        ></v-select>
+                        />
                     </v-col>
                     <v-col>
                         <v-select
@@ -61,7 +62,7 @@
                           :rules="[rules.errorSelects]"
                           color="blue-lighten-4"
                           multiple
-                        ></v-select>
+                        />
                     </v-col>
                 </v-row>    
             </v-form> 
@@ -75,13 +76,18 @@
 </template>
 
 <script>
-import people from '@/store/modules/people';
-
     export default {
         data() {
             return {
                 rules: {
-                    errorName: v => !!v || 'Введите название позиции',
+                    errorName: [
+                        v => !!v || 'Введите название позиции',
+                        v => {
+                            const pattern = /^\D+$/;
+                            console.log(pattern.test(v))
+                            return pattern.test(v) || 'Название позиции может содержать только буквы';
+                        }
+                    ],
                     errorPrice: v => !!v || 'Введите сумму',
                     errorSelect: v => !!v || 'Выберите участника',
                     errorSelects: v => v.length !== 0 || 'Выберите участников',

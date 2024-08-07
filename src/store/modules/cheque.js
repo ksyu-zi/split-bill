@@ -9,7 +9,9 @@ export default {
     total: state => {
       let res = 0;
       for (let i = 0; i < state.cheque.length; i++) {
-        res += +state.cheque[i].price;
+        if (state.cheque[i].price) {
+          res += +state.cheque[i].price;
+        }
       }
       return res;
     },
