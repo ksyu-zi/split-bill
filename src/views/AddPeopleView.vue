@@ -21,15 +21,7 @@
                 return this.$store.getters.getPeople;
             },
             btnDisabled() {
-                if (this.people.length >= 2) {
-                    for (let i = 0; i < this.people.length; i++) {
-                        if (this.people[i].name === '') {
-                            return true
-                        }
-                    }
-                    return false
-                }
-                return true
+                return this.$store.getters['people/getBtnDisabled'];
             }
         },
         components: {

@@ -19,7 +19,7 @@
                           type="text" 
                           label="Имя"
                           v-model="people[index].name" 
-                          :rules="[rules.errorName]"
+                          :rules="rules.errorName"
                           color="blue-lighten-4"
                         />
                     </v-col>
@@ -41,21 +41,27 @@
         data(){
             return {
                 rules: {
-                    errorName: v => !!v || 'Введите имя участника'
+                    errorName: [
+                        v => !!v || 'Введите имя участника',
+                        v => {
+                            const pattern = this.$store.getters['people/getValidName'];
+                            return pattern.test(v) || 'Имя участника может содержать только буквы, можно ввести в виде ФИО';
+                        }
+                    ]
                 }
             }
         },
         computed: {
             people() {
-                return this.$store.getters.getPeople;
+                return this.$store.getters['people/getPeople'];
             }
         },
         methods: {
             addPeople() {
-                this.$store.commit('addPeople');
+                this.$store.commit('people/addPeople');
             },
             delPeople(id) {
-                this.$store.commit('delPeople', id);
+                this.$store.commit('people/delPeople', id);
             }
         }
     }

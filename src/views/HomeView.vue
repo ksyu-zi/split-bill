@@ -33,8 +33,8 @@
 <script>
   export default {
     mounted() {
-      this.$store.commit('delAllPeople');
-      this.$store.commit('delAllCheque');
+      this.$store.commit('people/delAllPeople');
+      this.$store.commit('cheque/delAllCheque');
     }
   }
 </script>

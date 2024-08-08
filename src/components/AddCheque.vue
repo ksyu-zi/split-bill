@@ -83,9 +83,8 @@
                     errorName: [
                         v => !!v || 'Введите название позиции',
                         v => {
-                            const pattern = /^\D+$/;
-                            console.log(pattern.test(v))
-                            return pattern.test(v) || 'Название позиции может содержать только буквы';
+                            const pattern = this.$store.getters['cheque/getValidName'];
+                            return pattern.test(v) || 'Название позиции может содержать только буквы и пробел между словами';
                         }
                     ],
                     errorPrice: v => !!v || 'Введите сумму',
@@ -96,22 +95,22 @@
         },
         computed: {
             cheque() {
-                return this.$store.getters.getCheque;
+                return this.$store.getters['cheque/getCheque'];
             },
             people() {
-                return this.$store.getters.getPeople;
+                return this.$store.getters['people/getPeople'];
             },
             totalSum() {
-                return this.$store.getters.total;
+                return this.$store.getters['cheque/total'];
             },
 
         },
         methods: {
             addCheque() {
-                this.$store.commit('addCheque');
+                this.$store.commit('cheque/addCheque');
             },
             delCheque(id) {
-                this.$store.commit('delCheque', id);
+                this.$store.commit('cheque/delCheque', id);
             }
         }
     }

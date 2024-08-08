@@ -24,8 +24,8 @@
     export default {
         computed: {
             getResults() {
-                let people = this.$store.getters.getPeople;
-                let get = this.$store.getters.calcWHoToWhom;
+                let people = this.$store.getters['people/getPeople'];
+                let get = this.$store.getters['cheque/calcWHoToWhom'];
                 let person;
                 let debt;
                 let res;
@@ -35,7 +35,7 @@
                         res = [];
                         for (let debtor in get[person]) {
                             debt = get[person][debtor];
-                            res.push({ name: this.$store.getters.getName(debtor), debt: debt});
+                            res.push({ name: this.$store.getters['people/getName'](debtor), debt: debt});
                         }
                         if (res.length !== 0) {
                             people[i].debtors = res;

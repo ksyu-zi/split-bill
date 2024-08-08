@@ -1,10 +1,29 @@
 export default {
+  namespaced: true,
   state: {
-    cheque: []
+    cheque: [],
+    validName: /^([a-z]+|[а-яё]+)(\s([a-z]+|[а-яё]+)){0,}$/i
   },
   getters: {
-    getCheque: state => {
+    getCheque: (state) => {
       return state.cheque;
+    },
+    getValidName: (state) => {
+      return state.validName;
+    },
+    getBtnDisabled: (state) => {
+      if (state.cheque.length >= 1) {
+        for (let i = 0; i < state.cheque.length; i++) {
+          if (state.cheque[i].name === '' || state.cheque[i].price === null ||
+              state.cheque[i].payId === null || state.cheque[i].buyersId.length === 0) {
+            return true;
+          } else if (!state.validName.test(state.cheque[i].name) || isNaN(state.cheque[i].price) || state.cheque[i].price === 0) {
+            return true;
+          }
+        }
+        return false;
+      }
+      return true;
     },
     total: state => {
       let res = 0;
