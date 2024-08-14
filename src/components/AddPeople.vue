@@ -53,7 +53,12 @@
         },
         computed: {
             people() {
-                return this.$store.getters['people/getPeople'];
+                let people = this.$store.getters['people/getPeople'];
+                if (people.length === 0) {
+                    this.$store.dispatch('people/loadFromLocalStorage');
+                }
+                this.$store.getters['people/saveToLocalStorage'];
+                return people;
             }
         },
         methods: {
@@ -63,6 +68,11 @@
             delPeople(id) {
                 this.$store.commit('people/delPeople', id);
             }
-        }
+        },
+        mounted() {
+            if (this.people.length === 0) {
+                this.$store.dispatch('people/loadFromLocalStorage');
+            }
+        },
     }
 </script>

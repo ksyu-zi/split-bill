@@ -25,6 +25,9 @@ export default {
       }
       return true;
     },
+    saveToLocalStorage: (state) => {
+      localStorage.setItem('cheque', JSON.stringify(state.cheque));
+    },
     total: state => {
       let res = 0;
       for (let i = 0; i < state.cheque.length; i++) {
@@ -97,6 +100,17 @@ export default {
     },
     delAllCheque: (state) => {
       state.cheque = [];
+    },
+    setCheque: (state, cheque) => {
+      state.cheque = cheque;
+    }
+  },
+  actions: {
+    loadFromLocalStorage: ({commit}) => {
+      let chequeFromLocalStorage = JSON.parse(localStorage.getItem('cheque'));
+      if (chequeFromLocalStorage.length !== 0) {
+        commit('setCheque', chequeFromLocalStorage);
+      }
     }
   }
 }

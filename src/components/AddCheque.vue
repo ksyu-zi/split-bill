@@ -95,10 +95,20 @@
         },
         computed: {
             cheque() {
-                return this.$store.getters['cheque/getCheque'];
+                let cheque = this.$store.getters['cheque/getCheque'];
+                if (cheque.length === 0) {
+                    this.$store.dispatch('cheque/loadFromLocalStorage');
+                }
+                this.$store.getters['cheque/saveToLocalStorage'];
+                return cheque;
             },
             people() {
-                return this.$store.getters['people/getPeople'];
+                let people = this.$store.getters['people/getPeople'];
+                if (people.length === 0) {
+                    this.$store.dispatch('people/loadFromLocalStorage');
+                }
+                this.$store.getters['people/saveToLocalStorage'];
+                return people;
             },
             totalSum() {
                 return this.$store.getters['cheque/total'];
@@ -112,6 +122,11 @@
             delCheque(id) {
                 this.$store.commit('cheque/delCheque', id);
             }
-        }
+        },
+        mounted() {
+            if (this.cheque.length === 0) {
+                this.$store.dispatch('cheque/loadFromLocalStorage');
+            }
+        },
     }
 </script>

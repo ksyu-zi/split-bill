@@ -26,6 +26,9 @@ export default {
         return false;
       }
       return true;
+    },
+    saveToLocalStorage: (state) => {
+      localStorage.setItem('people', JSON.stringify(state.people));
     }
   },
   mutations: {
@@ -37,6 +40,17 @@ export default {
     },
     delAllPeople: (state) => {
       state.people = [];
+    },
+    setPeople: (state, people) => {
+      state.people = people;
+    }
+  },
+  actions: {
+    loadFromLocalStorage: ({commit}) => {
+      let peopleFromLocalStorage = JSON.parse(localStorage.getItem('people'));
+      if (peopleFromLocalStorage.length !== 0) {
+        commit('setPeople', peopleFromLocalStorage);
+      }
     }
   }
 }

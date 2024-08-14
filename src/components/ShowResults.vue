@@ -25,6 +25,13 @@
         computed: {
             getResults() {
                 let people = this.$store.getters['people/getPeople'];
+                let cheque = this.$store.getters['cheque/getCheque'];
+                if (people.length === 0) {
+                    this.$store.dispatch('people/loadFromLocalStorage');
+                }
+                if (cheque.length === 0) {
+                    this.$store.dispatch('cheque/loadFromLocalStorage');
+                }
                 let get = this.$store.getters['cheque/calcWHoToWhom'];
                 let person;
                 let debt;
@@ -44,6 +51,14 @@
                 }
                 return people;
             }
-        }
+        },
+        mounted() {
+            if (this.$store.getters['people/getPeople'] === 0) {
+                this.$store.dispatch('people/loadFromLocalStorage');
+            }
+            if (this.$store.getters['cheque/getCheque'] === 0) {
+                this.$store.dispatch('cheque/loadFromLocalStorage');
+            }
+        },
     }
 </script>
