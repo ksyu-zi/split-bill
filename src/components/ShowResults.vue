@@ -23,21 +23,20 @@
 <script>
     export default {
         computed: {
+            cheque() {
+                return this.$store.state.cheque.cheque;
+            },
+            people() {
+                return this.$store.state.people.people;
+            },
             getResults() {
-                let people = this.$store.getters['people/getPeople'];
-                let cheque = this.$store.getters['cheque/getCheque'];
-                if (people.length === 0) {
-                    this.$store.dispatch('people/loadFromLocalStorage');
-                }
-                if (cheque.length === 0) {
-                    this.$store.dispatch('cheque/loadFromLocalStorage');
-                }
+                let result = [];
                 let get = this.$store.getters['cheque/calcWHoToWhom'];
                 let person;
                 let debt;
                 let res;
-                for (let i = 0; i < people.length; i++) {
-                    person = people[i].id;
+                for (let i = 0; i < this.people.length; i++) {
+                    person = this.people[i].id;
                     if (get[person]) {
                         res = [];
                         for (let debtor in get[person]) {
@@ -45,20 +44,16 @@
                             res.push({ name: this.$store.getters['people/getName'](debtor), debt: debt});
                         }
                         if (res.length !== 0) {
-                            people[i].debtors = res;
+                            result.push({
+                                id: person,
+                                name: this.$store.getters['people/getName'](person),
+                                debtors: res
+                            });
                         }
                     }
                 }
-                return people;
+                return result;
             }
-        },
-        mounted() {
-            if (this.$store.getters['people/getPeople'] === 0) {
-                this.$store.dispatch('people/loadFromLocalStorage');
-            }
-            if (this.$store.getters['cheque/getCheque'] === 0) {
-                this.$store.dispatch('cheque/loadFromLocalStorage');
-            }
-        },
+        }
     }
 </script>

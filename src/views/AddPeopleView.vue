@@ -17,9 +17,6 @@
     
     export default {
         computed: {
-            people() {
-                return this.$store.getters.getPeople;
-            },
             btnDisabled() {
                 return this.$store.getters['people/getBtnDisabled'];
             }

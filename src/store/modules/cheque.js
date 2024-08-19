@@ -1,32 +1,27 @@
+const loadFromLocalStorage = () => {
+  return JSON.parse(localStorage.getItem('cheque'));
+}
+
 export default {
   namespaced: true,
   state: {
-    cheque: [],
-    validName: /^([a-z]+|[а-яё]+)(\s([a-z]+|[а-яё]+)){0,}$/i
+    cheque: loadFromLocalStorage() || [],
+    validNameReg: /^([a-z]+|[а-яё]+)(\s([a-z]+|[а-яё]+)){0,}$/i
   },
   getters: {
-    getCheque: (state) => {
-      return state.cheque;
-    },
-    getValidName: (state) => {
-      return state.validName;
-    },
     getBtnDisabled: (state) => {
       if (state.cheque.length >= 1) {
         for (let i = 0; i < state.cheque.length; i++) {
           if (state.cheque[i].name === '' || state.cheque[i].price === null ||
               state.cheque[i].payId === null || state.cheque[i].buyersId.length === 0) {
             return true;
-          } else if (!state.validName.test(state.cheque[i].name) || isNaN(state.cheque[i].price) || state.cheque[i].price === 0) {
+          } else if (!state.validNameReg.test(state.cheque[i].name) || isNaN(state.cheque[i].price) || state.cheque[i].price === 0) {
             return true;
           }
         }
         return false;
       }
       return true;
-    },
-    saveToLocalStorage: (state) => {
-      localStorage.setItem('cheque', JSON.stringify(state.cheque));
     },
     total: state => {
       let res = 0;
@@ -100,17 +95,11 @@ export default {
     },
     delAllCheque: (state) => {
       state.cheque = [];
-    },
-    setCheque: (state, cheque) => {
-      state.cheque = cheque;
     }
   },
   actions: {
-    loadFromLocalStorage: ({commit}) => {
-      let chequeFromLocalStorage = JSON.parse(localStorage.getItem('cheque'));
-      if (chequeFromLocalStorage.length !== 0) {
-        commit('setCheque', chequeFromLocalStorage);
-      }
+    saveToLocalStorage: ({state}) => {
+      localStorage.setItem('cheque', JSON.stringify(state.cheque));
     }
   }
 }

@@ -83,7 +83,7 @@
                     errorName: [
                         v => !!v || 'Введите название позиции',
                         v => {
-                            const pattern = this.$store.getters['cheque/getValidName'];
+                            const pattern = this.$store.state.cheque.validNameReg;
                             return pattern.test(v) || 'Название позиции может содержать только буквы и пробел между словами';
                         }
                     ],
@@ -95,20 +95,12 @@
         },
         computed: {
             cheque() {
-                let cheque = this.$store.getters['cheque/getCheque'];
-                if (cheque.length === 0) {
-                    this.$store.dispatch('cheque/loadFromLocalStorage');
-                }
-                this.$store.getters['cheque/saveToLocalStorage'];
+                let cheque = this.$store.state.cheque.cheque;
+                this.$store.dispatch('cheque/saveToLocalStorage');
                 return cheque;
             },
             people() {
-                let people = this.$store.getters['people/getPeople'];
-                if (people.length === 0) {
-                    this.$store.dispatch('people/loadFromLocalStorage');
-                }
-                this.$store.getters['people/saveToLocalStorage'];
-                return people;
+                return this.$store.state.people.people;
             },
             totalSum() {
                 return this.$store.getters['cheque/total'];
@@ -122,11 +114,6 @@
             delCheque(id) {
                 this.$store.commit('cheque/delCheque', id);
             }
-        },
-        mounted() {
-            if (this.cheque.length === 0) {
-                this.$store.dispatch('cheque/loadFromLocalStorage');
-            }
-        },
+        }
     }
 </script>

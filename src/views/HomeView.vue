@@ -35,8 +35,8 @@
     mounted() {
       this.$store.commit('people/delAllPeople');
       this.$store.commit('cheque/delAllCheque');
-      this.$store.getters['people/saveToLocalStorage'];
-      this.$store.getters['cheque/saveToLocalStorage'];
+      this.$store.dispatch('people/saveToLocalStorage');
+      this.$store.dispatch('cheque/saveToLocalStorage');
     }
   }
 </script>

@@ -44,7 +44,7 @@
                     errorName: [
                         v => !!v || 'Введите имя участника',
                         v => {
-                            const pattern = this.$store.getters['people/getValidName'];
+                            const pattern = this.$store.state.people.validNameReg;
                             return pattern.test(v) || 'Имя участника может содержать только буквы, можно ввести в виде ФИО';
                         }
                     ]
@@ -53,11 +53,8 @@
         },
         computed: {
             people() {
-                let people = this.$store.getters['people/getPeople'];
-                if (people.length === 0) {
-                    this.$store.dispatch('people/loadFromLocalStorage');
-                }
-                this.$store.getters['people/saveToLocalStorage'];
+                let people = this.$store.state.people.people;
+                this.$store.dispatch('people/saveToLocalStorage');
                 return people;
             }
         },
@@ -68,11 +65,6 @@
             delPeople(id) {
                 this.$store.commit('people/delPeople', id);
             }
-        },
-        mounted() {
-            if (this.people.length === 0) {
-                this.$store.dispatch('people/loadFromLocalStorage');
-            }
-        },
+        }
     }
 </script>

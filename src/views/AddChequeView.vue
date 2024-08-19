@@ -17,9 +17,6 @@
     
     export default {
         computed: {
-            cheque() {
-                return this.$store.getters['cheque/getCheque'];
-            },
             btnDisabled() {
                 return this.$store.getters['cheque/getBtnDisabled'];
             }
